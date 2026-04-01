@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-MCP-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "mcp-integration",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "08-mcp-integration",
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/mcp/config.ts",
+    "stableSymbol": "filterMcpServersByPolicy",
+    "excerptHash": "manual:mcp-001-policy-filter-v1",
+    "lineRange": "536-551"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/mcp/config.ts",
+      "stableSymbol": "parseMcpConfig",
+      "excerptHash": "manual:mcp-001-parse-config-v1",
+      "lineRange": "1297-1384"
+    }
+  ],
+  "observed": "`parseMcpConfig()` 先用 `McpJsonConfigSchema` 做 schema 校验，再逐个 server 处理 env var 展开、缺失环境变量警告，以及 Windows 下 `npx` wrapper 的特殊提醒。`filterMcpServersByPolicy()` 会遍历 config，只放过 `sdk` 类型或 `isMcpServerAllowedByPolicy(...)` 判定允许的 server，其余记录到 blocked 列表。",
+  "evidenceSummary": "MCP 接入不是“配上地址就完了”，而是先经过 schema 校验、环境变量展开和策略过滤。",
+  "inference": "Claude Code 把 MCP 当成高风险扩展边界，所以“能不能存在”这件事在连接之前就先被裁定，而不是等连上以后再说。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "enterprise policy 下哪些 server 类型或来源会被最常拦掉，若要展开仍需继续追 policy 判定实现。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-FLAG-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "feature-flags",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "06-prompt-caching",
+    "10-feature-flags",
+    "03-tool-system"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools.ts",
+    "stableSymbol": "top-level feature-gated tool requires",
+    "excerptHash": "manual:flag-003-tool-gates-v1",
+    "lineRange": "0-40"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/tools.ts",
+      "stableSymbol": "getAllBaseTools",
+      "excerptHash": "manual:flag-003-getallbasetools-v1",
+      "lineRange": "190-245"
+    }
+  ],
+  "observed": "`tools.ts` 顶层用 `feature(...)` 和 `process.env` 条件导入 SleepTool、cron tools、RemoteTriggerTool、MonitorTool、WorkflowTool 等一批工具模块；`getAllBaseTools()` 再把这些按当前 gate 条件拼进最终基线工具列表。",
+  "evidenceSummary": "Flag 不只控制“某个产品功能开没开”，还直接改变基础工具池的形状。",
+  "inference": "如果读者只把 `feature()` 当成产品经理开关，就会低估它对工具系统、提示词稳定性和启动负担的影响。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "哪些工具 flag 最常改变对模型可见的工具 schema，还需结合 tool schema cache 逻辑继续追。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

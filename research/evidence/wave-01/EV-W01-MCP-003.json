@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-MCP-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "mcp-integration",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "01-system-prompt",
+    "06-prompt-caching",
+    "08-mcp-integration"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/constants/prompts.ts",
+    "stableSymbol": "mcp_instructions section",
+    "excerptHash": "manual:mcp-003-prompt-delta-v1",
+    "lineRange": "509-523"
+  },
+  "observed": "`prompts.ts` 明确把 `mcp_instructions` 包进 `DANGEROUS_uncachedSystemPromptSection(...)`，注释说明：当 delta 开启时，instructions 会通过 `mcp_instructions_delta` attachment 公布，而不是继续每轮重算这段 prompt，因为服务器在 turn 之间连接/断开会打爆 prompt cache。",
+  "evidenceSummary": "MCP 指令被特别对待，不是因为它语义更高级，而是因为它波动性更高、会直接伤害 prompt cache。",
+  "inference": "这说明 MCP 集成会反向影响 Prompt/Cache 结构；它不是独立目录里的局部细节，而是会改动系统提示词放置策略的横切能力。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`mcp_instructions_delta` 在 UI 和 transcript 层的展示语义若要展开，还需补看 attachments 与 messages 相关实现。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

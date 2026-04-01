@@ -1,0 +1,40 @@
+version: 1
+chapter_id: "02-agentic-loop"
+chapter_path: "02-agentic-loop/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-04"
+  - "MF-05"
+  - "MF-08"
+  - "MF-09"
+required_evidence_ids:
+  - "EV-W01-LOOP-001"
+  - "EV-W01-LOOP-003"
+  - "EV-W01-LOOP-004"
+  - "EV-W01-LOOP-005"
+  - "EV-W01-CTX-004"
+  - "EV-W01-TOOL-003"
+sections:
+  - title: "真正的循环在 `query.ts`"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-001"
+  - title: "这一轮里，上下文是怎么被拼进去的"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-004"
+      - "EV-W01-LOOP-004"
+  - title: "为什么 Claude Code 选择顺序执行工具"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-003"
+      - "EV-W01-TOOL-003"
+  - title: "`tool_result` 回流是显式闭环，不是魔法"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-004"
+  - title: "继续 / 停止 / 压缩 决策链"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-005"
+notes: "Wave 1 聚焦 queryLoop 真实入口、tool_use 识别、tool_result 回流、continue/stop/compact 决策链。"

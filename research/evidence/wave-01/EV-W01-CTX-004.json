@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-CTX-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-assembly",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "00-overview",
+    "01-system-prompt",
+    "02-agentic-loop",
+    "06-prompt-caching",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/queryContext.ts",
+    "stableSymbol": "fetchSystemPromptParts",
+    "excerptHash": "manual:ctx-004-fetch-prompt-parts-v1",
+    "lineRange": "44-74"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/queryContext.ts",
+      "stableSymbol": "buildSideQuestionFallbackParams",
+      "excerptHash": "manual:ctx-004-build-toolusecontext-v1",
+      "lineRange": "88-178"
+    }
+  ],
+  "observed": "`fetchSystemPromptParts()` 用 `Promise.all` 并发获取 `getSystemPrompt(...)`、`getUserContext()`、`getSystemContext()`；如果传入 `customSystemPrompt`，则不调用默认 prompt builder 和 `getSystemContext()`，而是返回空的 `defaultSystemPrompt` 与空对象 `systemContext`。`buildSideQuestionFallbackParams()` 随后把 `customSystemPrompt | defaultSystemPrompt` 与 `appendSystemPrompt` 组装成 `systemPrompt`，并构造带有 commands、tools、thinkingConfig、mcpClients、mcpResources、messages、readFileState 与多种 setter 的 `ToolUseContext`。",
+  "evidenceSummary": "在进入查询辅助路径前，默认提示词、`user context`、`system context` 已先装配；随后这些结果与消息历史、工具、MCP、应用状态一起进入 `ToolUseContext`。",
+  "inference": "进入查询前已准备好的上下文不只是一段 prompt，而是 `systemPrompt`、两类 context 与一整套运行态对象。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "主循环主路径是否还会补充更多可选 `ToolUseContext` 字段。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

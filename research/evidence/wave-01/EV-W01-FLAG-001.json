@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-FLAG-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "feature-flags",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-02",
+  "chapterIds": [
+    "10-feature-flags",
+    "09-startup-optimization"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/main.tsx",
+    "stableSymbol": "feature-gated top-level requires",
+    "excerptHash": "manual:flag-001-top-level-requires-v1",
+    "lineRange": "74-82"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "coordinator tool filter",
+      "excerptHash": "manual:flag-001-coordinator-filter-v1",
+      "lineRange": "1870-1880"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "brief entitlement gating",
+      "excerptHash": "manual:flag-001-brief-gate-v1",
+      "lineRange": "1718-1735"
+    }
+  ],
+  "observed": "`main.tsx` 顶层对 `COORDINATOR_MODE`、`KAIROS` 等模块采用 `feature('...') ? require(...) : null` 的条件导入，并在后续动作处理中继续用 `feature(...)` 判断是否应用协调者工具过滤或 brief entitlement 相关逻辑。",
+  "evidenceSummary": "Feature Flag 在 Claude Code 里不只是运行时 if 判断，它直接控制哪些模块在构建后是否存在，以及这些能力在运行时是否参与主链。",
+  "inference": "这类 flag 同时承担了产品实验门控和启动路径裁剪两种职责，所以 `10-feature-flags` 和 `09-startup-optimization` 是天然相邻章节。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "不同构建产物中，哪些 feature gate 真正触发了死代码消除，还需结合构建链进一步验证。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

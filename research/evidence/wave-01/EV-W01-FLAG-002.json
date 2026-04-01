@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-FLAG-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "feature-flags",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "10-feature-flags",
+    "07-multi-agent"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools/AgentTool/builtInAgents.ts",
+    "stableSymbol": "areExplorePlanAgentsEnabled",
+    "excerptHash": "manual:flag-002-explore-plan-gate-v1",
+    "lineRange": "13-18"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/tools/AgentTool/builtInAgents.ts",
+      "stableSymbol": "getBuiltInAgents",
+      "excerptHash": "manual:flag-002-built-in-agents-v1",
+      "lineRange": "20-66"
+    }
+  ],
+  "observed": "`areExplorePlanAgentsEnabled()` 先检查 `feature('BUILTIN_EXPLORE_PLAN_AGENTS')`，再通过 `getFeatureValue_CACHED_MAY_BE_STALE('tengu_amber_stoat', true)` 决定 Explore/Plan agents 是否开启。`getBuiltInAgents()` 也会继续结合 `VERIFICATION_AGENT` 的 feature/growthbook 条件以及 entrypoint/session 类型决定最终内置 agent 列表。",
+  "evidenceSummary": "同一个功能是否出现，往往同时受构建时 flag 和运行时 GrowthBook 值控制，而不是只有一层开关。",
+  "inference": "Feature Flag 在 Claude Code 里不是“构建期一层、运行期一层各管各的”，而是可以叠加成多层门控链。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "是否还有其它 built-in agent 采用同样的 feature + growthbook 双门控模式。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

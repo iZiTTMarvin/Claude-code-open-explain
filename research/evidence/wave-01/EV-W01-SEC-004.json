@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-SEC-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "security",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/mcp/headersHelper.ts",
+    "stableSymbol": "getMcpHeadersFromHelper",
+    "excerptHash": "manual:sec-004-headers-helper-v1",
+    "lineRange": "25-104"
+  },
+  "observed": "`getMcpHeadersFromHelper()` 在存在 `headersHelper` 时，若该 MCP server 来自 project/local settings 且当前不是 non-interactive session，就会先检查 `checkHasTrustDialogAccepted()`；未建立 trust 时直接记录错误并返回 `null`，不执行 helper。通过信任检查后，才会执行 helper，并校验输出必须是 JSON object 且 value 全是字符串；失败时记录 MCP error 和普通 error，最后返回 `null` 而不是抛出异常阻断连接。",
+  "evidenceSummary": "动态 header helper 不是无条件执行的便捷钩子，而是受 workspace trust、交互模式和输出形状校验共同限制的一条敏感边界。",
+  "inference": "`headersHelper` 之所以值得单独警惕，不是因为它一定危险，而是因为它在连接前执行外部逻辑；Claude Code 已经把它当成需要 trust gate 的风险面。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "如果 helper 本身返回无效 JSON，当前“记录后返回 null 继续连接”的降级策略是否会掩盖某些诊断问题。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

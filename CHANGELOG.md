@@ -3,3 +3,102 @@
   - 重构根 README，补充项目定位、新手导读、阅读路线和章节导航
   - 逐章细化 00-11 章节 README，统一补充概念解释、源码入口、运行流程与设计取舍
   - 清理偏提纲式表达，强化与 `Claude-code-open` 源码结构的对应关系
+
+## 2026-04-01
+
+### 第一轮优化（上午）
+- **研究基线**：建立 Wave 1 bootstrap 包与唯一执行基线
+  - 新增 `research/` 目录，固定主链路、章节矩阵、术语表、evidence schema、wave briefs 与 truth chain
+  - 新增 canonical evidence registry、example evidence 与 `section manifest` 样例，避免后续子代理各写各的
+  - 新增 `scripts/validate-evidence.js` 最小本地校验脚本，为 Wave 1 前置门禁提供可执行检查
+- **研究证据**：接入 Wave 1 首批真实源码 evidence
+  - 基于首批并行子代理分析，落地 context、loop、tool、permission、compact 五类 canonical evidence
+  - 更新 `research/evidence/registry.json` 与 `research/section-manifests/00-overview.yml`，让 00-overview 首次拥有可追溯事实层
+  - 修正 example evidence 的 ID 冲突，并验证 `node scripts/validate-evidence.js` 可通过
+- **章节深化**：把 01-05 核心链路章节从概念讲解升级到源码证据支撑的深讲
+  - 强化 `01-system-prompt` 的优先级树、query 前装配路径与动态信息迁移逻辑
+  - 强化 `02-agentic-loop` 的真实循环入口、tool_use 识别、tool_result 回流与 continue/stop/compact 决策链
+  - 强化 `03-tool-system`、`04-permission-model`、`05-context-management` 的执行层分工、权限优先级与 compact 阈值/续跑机制
+- **章节扩展**：继续推进 06-08 章节的证据化补强
+  - 为 `06-prompt-caching` 补充 cache 约束如何反向塑造 prompt、context、compact 和工具描述
+  - 为 `07-multi-agent` 补充 built-in agent 条件注入、覆盖优先级、in-process teammate 生命周期与 Team 元数据
+  - 为 `08-mcp-integration` 补充配置校验/策略过滤、能力总线式接入，以及 `mcp_instructions_delta` 对 prompt cache 的影响
+- **章节收束**：继续推进 09-11 章节的证据化补强
+  - 为 `09-startup-optimization` 补充顶层并行预热、startup profiler 与启动期预取路径
+  - 为 `10-feature-flags` 补充构建时 gate、运行时 gate、双层门控以及工具池/agent 池受 flag 改写的机制
+  - 为 `11-security` 补充 `CYBER_RISK_INSTRUCTION`、sandbox manager 与安全初始化时序
+- **入口统一**：收束根 README 与总览章叙事
+  - 更新根 `README.md` 的整体直觉图、阅读路线和阅读方法，使其与 `00-overview` 的主链理解保持一致
+  - 在首页明确 systemPrompt / context / tool pool / queryLoop / compact / MCP 是同一条运行时主链上的不同层
+- **QA 收口**：补齐 manifest / registry / glossary 的一致性治理
+  - 把 `section manifest` 升级到小节级 evidence 映射，并补齐 `required_evidence_ids` 闭包
+  - 同步 evidence 与 registry 的章节归属，新增 `headersHelper` 安全 evidence，并强化 validator 对 manifest / registry 的一致性检查
+  - 扩充 glossary 到”中文名 + 英文名 + 代码拼写 + 类型”结构，减少术语漂移
+
+### 第二轮优化（下午）
+- **文档可读性提升**：系统性优化核心章节的表达和文采
+  - 重写根 `README.md` 的”为什么值得读”部分，从”要点罗列”升级为”场景化解释”
+    - 增加”安全与自由的平衡””性能与成本的权衡””简单与完整的取舍”三个具体维度
+    - 补充工程思维的深层价值，不只讲”做了什么”，更讲”为什么这样做”
+  - 重写根 `README.md` 的”快速建立整体直觉”部分，让流程图更有解释力
+    - 为每个关键节点增加”为什么”的解释，不只是”做什么”
+    - 增加”换个更直白的说法”段落，用类比帮助理解
+  - 深化 `00-overview` 的”先说结论”部分
+    - 增加”汽车发动机”类比，让”核心简单但外围厚实”的设计哲学更易理解
+    - 纠正”核心简单所以系统简单”的常见误解
+  - 深化 `00-overview` 的”一次完整请求是怎么流动的”部分
+    - 为每个步骤增加”为什么要这样设计”的解释
+    - 补充”先讲现象，再讲源码，再讲设计取舍”的叙事节奏
+    - 增加具体的技术细节和实现原理，避免”偏硬、偏短、偏像摘要”
+  - 深化 `01-system-prompt` 的核心概念
+    - 重写开头部分，从”三个层面的复杂性”切入，让读者理解 Prompt 不是静态文本
+    - 重写”静态区与动态区”部分，增加”先理解现实问题→再看解决方案→最后讲深层意义”的层次
+    - 补充 Prompt Cache 的成本和性能影响，让技术决策更有说服力
+    - 用”冰箱制冷”类比解释缓存失效代价
+  - 深化 `02-agentic-loop` 的职责分离
+    - 重写开头部分，用”导演与演员”类比解释 QueryEngine 和 query 的分工
+    - 补充”为什么要这样拆分”的三个维度：职责分离、可测试性、可维护性
+  - 深化 `03-tool-system` 的核心认识
+    - 重写开头部分，纠正”模型可以直接操作电脑”的常见误解
+    - 补充”模型只是文本生成器”的本质，让工具系统的必要性更清晰
+  - 深化 `04-permission-model` 的安全理念
+    - 重写开头部分，用”rm -rf /”的真实风险场景引入权限系统的必要性
+    - 重写”路径校验”部分，用三个具体场景展示”同样的工具，不同的路径，完全不同的风险”
+    - 补充”路径边界优先于 allow 规则”的设计哲学和”最小权限原则”的落地方式
+  - 深化 `05-context-management` 的核心问题
+    - 重写开头部分，用”窗口上限””成本失控””信息密度下降”三个致命问题引入上下文管理的必要性
+    - 重写”压缩不是删除”部分，对比”粗糙实现”和”Claude Code 方案”，展示任务连续性的重要性
+    - 补充”无缝续跑”的实现机制和”压缩代价”的权衡分析
+    - 用”高速公路换油箱”类比解释无缝续跑机制
+  - 深化 `06-prompt-caching` 的架构影响
+    - 重写开头部分，纠正”缓存只是小优化”的误解，强调”缓存是架构约束”
+    - 补充”每次调用都要花钱”的现实问题和”内容必须稳定”的致命要求
+    - 增加”让缓存需求反向塑造架构”的四个具体决策和”CLAUDE.md 不进稳定前缀”的案例分析
+    - 补充”让约束塑造架构”的深层工程哲学
+  - 深化 `07-multi-agent` 的核心价值
+    - 重写开头部分，用”重构复杂模块”的真实场景展示单 Agent 的困境
+    - 补充”任务隔离”的解决方案和”上下文保持清爽”的四个好处
+    - 强调多 Agent 不是”并发优化”，而是”上下文隔离工具”
+  - 深化 `08-mcp-integration` 的扩展价值
+    - 重写开头部分，用”内部知识库”的真实场景展示 MCP 的必要性
+    - 补充”为什么需要统一协议”的三个问题和”配置问题 vs 开发问题”的对比
+    - 增加”没有 MCP vs 有 MCP”的流程对比，展示扩展模式的根本改变
+  - 深化 `09-startup-optimization` 的性能价值
+    - 重写开头部分，用”等待 3 秒启动”的真实场景展示启动优化的必要性
+    - 补充”启动慢会破坏工作流”的三个维度：打断思路、降低使用频率、影响信任感
+    - 用”打开冰箱等 3 秒”类比解释启动延迟的体验问题
+  - 深化 `10-feature-flags` 的工程价值
+    - 重写开头部分，用”新功能上线风险””实验性功能取舍””不同用户需求”三个真实场景引入
+    - 补充 Feature Flag 的三种角色：产品发布控制、构建优化工具、架构演进信号
+    - 强调读 Flag 是在读”演进轨迹和工程智慧”
+  - 深化 `11-security` 的安全理念
+    - 重写开头部分，用”rm -rf / 误执行”的可怕场景引入安全的必要性
+    - 补充四个真实风险场景：模型误解需求、Prompt Injection、路径逃逸、MCP 服务器攻击
+    - 强调安全不是”附加功能”，而是”整个系统的生命线”
+- **优化原则**：
+  - 保持所有技术判断以源码为依据，不编造没有根据的结论
+  - 增加段落过渡和叙事流畅度，避免”要点罗列”式表达
+  - 补充”为什么”的深入解释，增加类比和实例
+  - 保持现有章节结构不变，只优化表达和深度
+  - 用”先讲现象/问题 → 再讲源码/方案 → 最后讲设计取舍”的节奏重构关键段落
+  - 系统化使用类比：汽车发动机、冰箱制冷、导演与演员、高速公路换油箱等

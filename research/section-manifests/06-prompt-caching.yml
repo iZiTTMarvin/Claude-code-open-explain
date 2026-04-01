@@ -1,0 +1,41 @@
+version: 1
+chapter_id: "06-prompt-caching"
+chapter_path: "06-prompt-caching/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-03"
+  - "MF-09"
+required_evidence_ids:
+  - "EV-W01-CTX-003"
+  - "EV-W01-CTX-004"
+  - "EV-W01-COMP-001"
+  - "EV-W01-COMP-004"
+  - "EV-W01-MCP-003"
+  - "EV-W01-TOOL-002"
+  - "EV-W01-FLAG-003"
+sections:
+  - title: "新手先改掉一个过于简单的理解"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-003"
+      - "EV-W01-CTX-004"
+  - title: "`SYSTEM_PROMPT_DYNAMIC_BOUNDARY` 的意义"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-MCP-003"
+  - title: "为什么 Claude Code 会对“动态内容泄漏”这么敏感"
+    kind: "explain"
+    evidence_ids:
+      - "EV-W01-COMP-004"
+      - "EV-W01-MCP-003"
+  - title: "为什么“工具描述”也会影响缓存"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-002"
+      - "EV-W01-FLAG-003"
+  - title: "缓存优化为什么会反过来塑造架构"
+    kind: "explain"
+    evidence_ids:
+      - "EV-W01-MCP-003"
+      - "EV-W01-COMP-004"
+notes: "Wave 1 先锚定 effective system prompt 优先级、query 前分通道装配、compact 与 cache 的相互牵制。"

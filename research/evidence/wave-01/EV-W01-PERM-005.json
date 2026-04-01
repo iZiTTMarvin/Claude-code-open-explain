@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-PERM-005",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "permission-boundary",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-06",
+  "chapterIds": [
+    "04-permission-model",
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/permissions/pathValidation.ts",
+    "stableSymbol": "isPathAllowed",
+    "excerptHash": "manual:perm-005-ispathallowed-v1",
+    "lineRange": "141-263"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/permissions/permissions.ts",
+      "stableSymbol": "hasPermissionsToUseToolInner safetyCheck precedence",
+      "excerptHash": "manual:perm-005-safetycheck-v1",
+      "lineRange": "1238-1260"
+    }
+  ],
+  "observed": "`isPathAllowed` 的路径判定顺序是：先看路径 deny 规则；写操作优先放行内部可编辑路径；然后执行 `checkPathSafetyForAutoEdit`，若不安全就返回 `decisionReason.type = 'safetyCheck'`；之后才检查 working directory，其中写入只有 `context.mode === 'acceptEdits'` 才能因工作目录自动放行；读操作再检查内部可读路径；对工作目录外的写入，只有通过 safetyCheck 后才会检查 sandbox write allowlist；最后才检查 allow 规则。`hasPermissionsToUseToolInner` 在接到 `decisionReason.type === 'safetyCheck'` 时会直接返回，这一步发生在 bypass 和 whole-tool allow 之前。",
+  "evidenceSummary": "路径边界被放在权限流水线的更早位置，并且对 bypass / allow 具备更高优先级。",
+  "inference": "路径边界与权限边界不是并列关系，而是内嵌关系；危险路径不能被更宽松的工作目录、allow 规则或 bypass 模式直接覆盖。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "这套泛化路径判定是否被所有写工具统一复用，还需继续补工具侧调用链。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

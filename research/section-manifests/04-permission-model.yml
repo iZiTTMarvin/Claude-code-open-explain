@@ -1,0 +1,30 @@
+version: 1
+chapter_id: "04-permission-model"
+chapter_path: "04-permission-model/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-06"
+required_evidence_ids:
+  - "EV-W01-PERM-001"
+  - "EV-W01-PERM-003"
+  - "EV-W01-PERM-005"
+  - "EV-W01-TOOL-003"
+sections:
+  - title: "实际有哪些权限模式"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-PERM-001"
+  - title: "为什么 Bash 命令要走更重的权限链路"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-PERM-003"
+  - title: "规则系统不是摆设"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-003"
+      - "EV-W01-PERM-005"
+  - title: "路径校验为什么是权限系统的核心组成部分"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-PERM-005"
+notes: "Wave 1 聚焦启动期模式裁决、危险规则剥离、路径 safetyCheck 优先级，以及执行层中的权限插入点。"

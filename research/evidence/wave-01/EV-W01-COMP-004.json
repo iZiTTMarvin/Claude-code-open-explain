@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-COMP-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-compaction",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-09",
+  "chapterIds": [
+    "05-context-management",
+    "06-prompt-caching"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/compact/compact.ts",
+    "stableSymbol": "streamCompactSummary",
+    "excerptHash": "manual:comp-004-streamcompact-v1",
+    "lineRange": "1151-1200"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/compact/compact.ts",
+      "stableSymbol": "streamCompactSummary fallback path",
+      "excerptHash": "manual:comp-004-streamcompact-fallback-v1",
+      "lineRange": "1292-1321"
+    }
+  ],
+  "observed": "`streamCompactSummary()` 在 prompt cache sharing 开启时优先走 `runForkedAgent()`，注释明确要求“不要设置 `maxOutputTokens`”，因为这会在 `claude.ts` 中改变 `budget_tokens`，导致 cache-key 参数失配，破坏主线程 prompt cache 复用。只有在回退到普通 streaming 路径时，才通过 `maxOutputTokensOverride: min(COMPACT_MAX_OUTPUT_TOKENS, getMaxOutputTokensForModel(...))` 对 compact summary 的输出长度做显式上限约束。",
+  "evidenceSummary": "compact summary 的生成同时受两套约束驱动：要么优先保持 prompt-cache key 稳定复用缓存，要么在非缓存共享路径上显式限制 summary 输出上限。",
+  "inference": "“为 compact summary 预留输出 token”不只是上下文管理问题，也直接牵涉 prompt caching 策略。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`COMPACT_MAX_OUTPUT_TOKENS` 与 `MAX_OUTPUT_TOKENS_FOR_SUMMARY` 是否刻意对齐，仍需补看其它常量层。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

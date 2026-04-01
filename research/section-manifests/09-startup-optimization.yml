@@ -1,0 +1,30 @@
+version: 1
+chapter_id: "09-startup-optimization"
+chapter_path: "09-startup-optimization/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-02"
+required_evidence_ids:
+  - "EV-W01-START-001"
+  - "EV-W01-START-002"
+  - "EV-W01-FLAG-001"
+  - "EV-W01-SEC-003"
+sections:
+  - title: "`main.tsx` 开头为什么那么“奇怪”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-START-001"
+  - title: "并行预取到底在优化什么"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-START-001"
+      - "EV-W01-START-002"
+  - title: "Bun 的 `feature()` 为什么对启动这么重要"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-FLAG-001"
+  - title: "为什么启动阶段也会体现安全边界"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-SEC-003"
+notes: "Wave 1 聚焦启动关键路径上的并行预热、startup profiler、预取动作和安全初始化时序。"

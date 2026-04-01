@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-CTX-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-assembly",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "01-system-prompt",
+    "06-prompt-caching",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/systemPrompt.ts",
+    "stableSymbol": "buildEffectiveSystemPrompt",
+    "excerptHash": "manual:ctx-003-effective-prompt-v1",
+    "lineRange": "41-123"
+  },
+  "observed": "`buildEffectiveSystemPrompt()` 先检查 `overrideSystemPrompt`；有值时直接返回。否则若协调者模式开启且当前没有 `mainThreadAgentDefinition`，就改用 coordinator prompt。之后再计算 `agentSystemPrompt`：在 proactive/KAIROS 激活时，agent prompt 追加到 `defaultSystemPrompt` 后；否则 agent prompt 直接替换默认/自定义提示词。若没有 agent prompt，则回落到 `customSystemPrompt` 或 `defaultSystemPrompt`。除 override 分支外，`appendSystemPrompt` 都会在末尾追加。",
+  "evidenceSummary": "有效系统提示词不是单一模板，而是一个明确的优先级树：override > coordinator > agent > custom > default，再加尾部 append。",
+  "inference": "`01-system-prompt` 章节应把系统提示词解释为“按优先级装配出来的结果”，而不是把默认 prompt 误写成唯一来源。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`defaultSystemPrompt` 的正文细节仍需另外锚定到 prompts 常量层。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

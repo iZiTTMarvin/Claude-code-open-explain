@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-START-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "startup-optimization",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-02",
+  "chapterIds": [
+    "09-startup-optimization"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/startupProfiler.ts",
+    "stableSymbol": "profileCheckpoint",
+    "excerptHash": "manual:start-002-profiler-v1",
+    "lineRange": "65-123"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "startup prefetches and checkpoints",
+      "excerptHash": "manual:start-002-prefetches-v1",
+      "lineRange": "405-420"
+    }
+  ],
+  "observed": "`profileCheckpoint()` 会在 profiling 开启时记录命名 checkpoint；`profileReport()` 会输出整条启动时间线并写入日志文件。`main.tsx` 在启动阶段还会主动触发 `prefetchAwsCredentialsAndBedRockInfoIfSafe()`、`prefetchGcpCredentialsIfSafe()`、`prefetchOfficialMcpUrls()`、`initializeAnalyticsGates()`、`refreshModelCapabilities()` 等预取或初始化动作。",
+  "evidenceSummary": "Claude Code 的启动优化不是只靠“少 import”，而是把 profiler 打点和多类预取动作结合起来，持续量化和并行化关键路径。",
+  "inference": "这说明启动性能在 Claude Code 里是被系统性经营的：一边把可并行的动作前移，一边保留足够细的 checkpoint 去防止日后性能悄悄回退。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "不同 entrypoint 下 checkpoint 时间线的差异是否值得单独开一个附录。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

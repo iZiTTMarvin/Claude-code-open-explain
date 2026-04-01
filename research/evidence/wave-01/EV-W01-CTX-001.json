@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-CTX-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-assembly",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-02",
+  "chapterIds": [
+    "00-overview",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/main.tsx",
+    "stableSymbol": "program.hook(preAction) -> initializeToolPermissionContext",
+    "excerptHash": "manual:ctx-001-main-init-v1",
+    "lineRange": "905-916"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "module bootstrap side effects",
+      "excerptHash": "manual:ctx-001-bootstrap-v1",
+      "lineRange": "1-20"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "initializeToolPermissionContext callsite",
+      "excerptHash": "manual:ctx-001-perm-callsite-v1",
+      "lineRange": "1722-1815"
+    }
+  ],
+  "observed": "`main.tsx` 在模块顶层先执行 `profileCheckpoint('main_tsx_entry')`、`startMdmRawRead()`、`startKeychainPrefetch()`；`program.hook('preAction')` 会在 `init()` 前等待托管设置与 keychain 预取完成，随后动作处理路径调用 `initializeToolPermissionContext(...)`，并提前启动 `claudeaiConfigPromise` 与 `mcpConfigPromise`。",
+  "evidenceSummary": "MF-02 在真正进入会话逻辑前，已经并行预热启动剖析、托管设置/MDM 读取、keychain 凭据读取，并建立与 permission mode 相关的工具权限上下文和 MCP 配置加载。",
+  "inference": "启动阶段不只是解析参数，而是先准备后续 tool use 会依赖的权限边界、托管配置和外部连接元数据，减少首轮查询前的串行等待。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "MCP 资源的实际预取是否应拆成另一条独立的 MF-02 证据。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

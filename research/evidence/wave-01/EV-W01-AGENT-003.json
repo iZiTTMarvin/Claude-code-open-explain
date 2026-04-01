@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-AGENT-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "multi-agent",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-07",
+  "chapterIds": [
+    "07-multi-agent"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/swarm/spawnInProcess.ts",
+    "stableSymbol": "spawnInProcessTeammate",
+    "excerptHash": "manual:agent-003-spawn-in-process-v1",
+    "lineRange": "104-208"
+  },
+  "observed": "`spawnInProcessTeammate()` 会为 teammate 生成确定性的 `agentId` 和新的 `taskId`，并且创建 **独立的** `AbortController`，注释明确说明 teammate 不应在 leader query 被中断时一起 abort。之后它会构造 `TeammateIdentity`、`teammateContext`、注册 Perfetto agent、创建 `InProcessTeammateTaskState`，最后把任务注册进 `AppState`。",
+  "evidenceSummary": "in-process teammate 不是“顺手开个函数分支”，而是带独立身份、独立中断控制、独立任务状态的正式执行单元。",
+  "inference": "Claude Code 的多 Agent 真正强调的是上下文/生命周期隔离，而不只是“并行地多跑几件事”。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "Pane backend 和 in-process backend 在生命周期管理语义上是否完全一致，还需补看统一 executor 接口。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

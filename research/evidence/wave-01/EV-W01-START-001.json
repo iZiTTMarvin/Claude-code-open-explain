@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-START-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "startup-optimization",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-02",
+  "chapterIds": [
+    "09-startup-optimization"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/main.tsx",
+    "stableSymbol": "startup top-level side effects",
+    "excerptHash": "manual:start-001-top-level-prefetch-v1",
+    "lineRange": "1-20"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "program.hook preAction waits for prefetch",
+      "excerptHash": "manual:start-001-preaction-wait-v1",
+      "lineRange": "903-918"
+    }
+  ],
+  "observed": "`main.tsx` 开头的注释明确写出三个必须在其它 import 前触发的副作用：`profileCheckpoint('main_tsx_entry')`、`startMdmRawRead()`、`startKeychainPrefetch()`。随后 `program.hook('preAction')` 会在 `init()` 前显式 `await Promise.all([ensureMdmSettingsLoaded(), ensureKeychainPrefetchCompleted()])`。",
+  "evidenceSummary": "Claude Code 不是被动等待 import 完成后再做慢 I/O，而是把 MDM 和 keychain 一类预读提前发车，并在真正执行命令前统一等待结果归位。",
+  "inference": "这是一种很典型的 CLI 关键路径优化：先把注定要做的慢 I/O 提前并行化，再把同步等待压缩到真正需要的那个时间点。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "除 MDM 和 keychain 之外，是否还有其它值得提升到模块顶层并行预热的 I/O。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

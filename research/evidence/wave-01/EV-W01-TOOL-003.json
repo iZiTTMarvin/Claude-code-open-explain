@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-TOOL-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "tool-execution",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-07",
+  "chapterIds": [
+    "02-agentic-loop",
+    "03-tool-system",
+    "04-permission-model"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/tools/toolOrchestration.ts",
+    "stableSymbol": "runTools",
+    "excerptHash": "manual:tool-003-runtools-v1",
+    "lineRange": "19-81"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/tools/toolOrchestration.ts",
+      "stableSymbol": "partitionToolCalls",
+      "excerptHash": "manual:tool-003-partition-v1",
+      "lineRange": "86-176"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/tools/toolExecution.ts",
+      "stableSymbol": "checkPermissionsAndCallTool",
+      "excerptHash": "manual:tool-003-checkpermissions-v1",
+      "lineRange": "614-733"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/tools/toolExecution.ts",
+      "stableSymbol": "tool.call",
+      "excerptHash": "manual:tool-003-toolcall-v1",
+      "lineRange": "1207-1223"
+    }
+  ],
+  "observed": "`runTools()` 先按 `tool.isConcurrencySafe(parsedInput)` 把 tool_use 分批，连续并发安全工具并发执行，非并发安全工具串行执行；并发批次中的 `contextModifier` 会暂存后按原 block 顺序回放。真正的单次执行则下沉到 `checkPermissionsAndCallTool()`，其中包含 schema 校验、`validateInput()`、PreToolUse hooks、权限判定，以及最后的 `tool.call()`。",
+  "evidenceSummary": "编排层负责“怎么排程、怎么保序、怎么回放上下文”，执行层负责“单个工具能不能跑、怎么跑、跑完产出什么”。",
+  "inference": "`toolOrchestration.ts` 和 `toolExecution.ts` 的分工非常清晰；权限判定虽属于 `04-permission-model`，但它在主链上是执行层内部步骤，不是编排层职责。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "并发批次的 `contextModifier` 延后回放是否会在极少数工具组合下造成可观察时序差异。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-AGENT-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "multi-agent",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-07",
+  "chapterIds": [
+    "07-multi-agent"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools/TeamCreateTool/TeamCreateTool.ts",
+    "stableSymbol": "TeamCreateTool.call",
+    "excerptHash": "manual:agent-004-teamcreate-v1",
+    "lineRange": "74-205"
+  },
+  "observed": "`TeamCreateTool.call()` 不只是生成几个成员对象。它会检查当前 leader 是否已在 team 中、生成唯一 team name、构造 `TeamFile`、异步写入 team file、为 session 注册 cleanup、重置并创建 task list 目录、调用 `setLeaderTeamName(...)`，然后再把 teamContext 写入 `AppState`。",
+  "evidenceSummary": "Team 模式在 Claude Code 里是一个有元数据、有持久化、有任务目录的正式协作状态，而不是临时性的多开 agent。",
+  "inference": "Team 模式比单个 `AgentTool` 更重，因为它不只处理推理分工，还处理团队身份、任务列表和会话结束后的清理。 ",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "leader 与 teammate 的任务目录、team file 生命周期在异常退出场景下是否总能一致清理。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

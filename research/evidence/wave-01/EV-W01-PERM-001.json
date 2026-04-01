@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-PERM-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "permission-boundary",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-06",
+  "chapterIds": [
+    "00-overview",
+    "04-permission-model"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/permissions/permissionSetup.ts",
+    "stableSymbol": "initialPermissionModeFromCLI",
+    "excerptHash": "manual:perm-001-initial-mode-v1",
+    "lineRange": "689-810"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/main.tsx",
+      "stableSymbol": "main permission mode setup callsite",
+      "excerptHash": "manual:perm-001-main-callsite-v1",
+      "lineRange": "1389-1410"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/permissions/PermissionMode.ts",
+      "stableSymbol": "permissionModeFromString",
+      "excerptHash": "manual:perm-001-mode-normalize-v1",
+      "lineRange": "117-121"
+    }
+  ],
+  "observed": "`main()` 先调用 `initialPermissionModeFromCLI({ permissionModeCli, dangerouslySkipPermissions })`，拿到本次会话的 `mode` 与可选 `notification`。`initialPermissionModeFromCLI` 会读取 settings，检查 bypass gate 与 settings 中的 `disableBypassPermissionsMode`，并在 classifier 打开时对 `auto` 做同步短路。它按 `dangerouslySkipPermissions -> CLI permissionMode -> settings.permissions.defaultMode` 的顺序收集候选 mode，CLI 字符串通过 `permissionModeFromString` 归一化；未知 mode 回退到 `default`。",
+  "evidenceSummary": "CLI 启动时先确定 permission mode，再进入后续权限上下文初始化。",
+  "inference": "权限模式是在启动阶段被一次性归一化和裁决的，而不是等到具体 tool 执行时才动态决定。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`PERMISSION_MODES` 的完整成员若要列成表，还需补 type-level anchor。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-SEC-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "security",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-07",
+  "chapterIds": [
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/sandbox/sandbox-adapter.ts",
+    "stableSymbol": "wrapWithSandbox",
+    "excerptHash": "manual:sec-002-wrap-sandbox-v1",
+    "lineRange": "700-719"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/sandbox/sandbox-adapter.ts",
+      "stableSymbol": "initialize",
+      "excerptHash": "manual:sec-002-init-sandbox-v1",
+      "lineRange": "723-790"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/sandbox/sandbox-adapter.ts",
+      "stableSymbol": "SandboxManager",
+      "excerptHash": "manual:sec-002-sandbox-manager-v1",
+      "lineRange": "927-964"
+    }
+  ],
+  "observed": "`wrapWithSandbox()` 在 sandbox 开启时会先等待初始化 promise，然后调用 `BaseSandboxManager.wrapWithSandbox(...)` 包裹命令。`initialize()` 会先检查 sandbox 是否在 settings 中开启，再包装 callback 以强制执行 `allowManagedDomainsOnly` 策略；初始化成功后会订阅 settings 变化并动态更新 sandbox 配置。对外暴露的 `SandboxManager` 统一转发这层配置、能力检查和清理逻辑。",
+  "evidenceSummary": "Claude Code 的 sandbox 不是孤立命令包装器，而是一个会受 settings、策略、网络域限制和运行时更新共同驱动的安全管理器。",
+  "inference": "从产品角度看，sandbox 是一层持续生效的运行时安全底座，不只是“执行 Bash 前临时套个壳”。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "不同平台下 sandbox capability 的差异若要展开，仍需继续看 supported platform 与 dependency check 分支。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,191 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://claude-code-open-explain.local/research/evidence.schema.json",
+  "title": "Claude Code Open Explain Evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "evidenceId",
+    "status",
+    "waveId",
+    "agentRole",
+    "snapshotRef",
+    "lastVerifiedCommit",
+    "lastVerifiedAt",
+    "mainFlowStepId",
+    "chapterIds",
+    "sourceAnchor",
+    "observed",
+    "evidenceSummary",
+    "inference",
+    "confidence",
+    "conflictFlag",
+    "readyForChapterBackfill",
+    "openQuestions"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "type": "integer",
+      "const": 1
+    },
+    "evidenceId": {
+      "type": "string",
+      "pattern": "^EV-W\\d{2}-[A-Z0-9-]+-\\d{3}$"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "verified",
+        "contested",
+        "published",
+        "stale",
+        "superseded"
+      ]
+    },
+    "waveId": {
+      "type": "string",
+      "pattern": "^wave-\\d{2}$"
+    },
+    "agentRole": {
+      "type": "string"
+    },
+    "snapshotRef": {
+      "type": "string"
+    },
+    "lastVerifiedCommit": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{40}$"
+    },
+    "lastVerifiedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "mainFlowStepId": {
+      "type": "string",
+      "enum": [
+        "MF-01",
+        "MF-02",
+        "MF-03",
+        "MF-04",
+        "MF-05",
+        "MF-06",
+        "MF-07",
+        "MF-08",
+        "MF-09",
+        "MF-10"
+      ]
+    },
+    "chapterIds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "pattern": "^(00|01|02|03|04|05|06|07|08|09|10|11)-[a-z0-9-]+$"
+      }
+    },
+    "sourceAnchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshotCommit",
+        "filePath",
+        "stableSymbol",
+        "excerptHash"
+      ],
+      "properties": {
+        "snapshotCommit": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$"
+        },
+        "filePath": {
+          "type": "string"
+        },
+        "stableSymbol": {
+          "type": "string"
+        },
+        "excerptHash": {
+          "type": "string"
+        },
+        "lineRange": {
+          "type": "string",
+          "pattern": "^\\d+-\\d+$"
+        }
+      }
+    },
+    "relatedAnchors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "snapshotCommit",
+          "filePath",
+          "stableSymbol",
+          "excerptHash"
+        ],
+        "properties": {
+          "snapshotCommit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$"
+          },
+          "filePath": {
+            "type": "string"
+          },
+          "stableSymbol": {
+            "type": "string"
+          },
+          "excerptHash": {
+            "type": "string"
+          },
+          "lineRange": {
+            "type": "string",
+            "pattern": "^\\d+-\\d+$"
+          }
+        }
+      }
+    },
+    "observed": {
+      "type": "string",
+      "minLength": 1
+    },
+    "evidenceSummary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "inference": {
+      "type": "string",
+      "minLength": 1
+    },
+    "confidence": {
+      "type": "string",
+      "enum": [
+        "high",
+        "medium",
+        "low"
+      ]
+    },
+    "conflictFlag": {
+      "type": "boolean"
+    },
+    "readyForChapterBackfill": {
+      "type": "boolean"
+    },
+    "openQuestions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reviewedBy": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "supersedes": {
+      "type": "string"
+    }
+  }
+}

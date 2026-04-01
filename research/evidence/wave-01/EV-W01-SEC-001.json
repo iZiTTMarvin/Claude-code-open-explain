@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-SEC-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "security",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/constants/cyberRiskInstruction.ts",
+    "stableSymbol": "CYBER_RISK_INSTRUCTION",
+    "excerptHash": "manual:sec-001-cyber-risk-v1",
+    "lineRange": "1-24"
+  },
+  "observed": "`CYBER_RISK_INSTRUCTION` 文件头明确写着“DO NOT MODIFY THIS INSTRUCTION WITHOUT SAFEGUARDS TEAM REVIEW”，并解释这段指令用于界定 defensive security assistance 与潜在有害请求之间的边界。常量正文要求 Claude 协助授权的安全测试、CTF、教育场景，但拒绝破坏性技术、DoS、供应链破坏、恶意规避检测等请求。",
+  "evidenceSummary": "Claude Code 的安全边界不是只靠运行时权限或沙箱，它还把一部分高风险请求边界写进了系统级安全指令，并且由专门团队管理。",
+  "inference": "这说明安全在 Claude Code 里既是工程边界，也是策略边界；某些风险在进入工具执行前就已经先被行为规则切掉了。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "这段 instruction 最终注入到哪一层 system prompt，需要继续追 prompts 组装点。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

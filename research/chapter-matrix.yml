@@ -1,0 +1,75 @@
+version: 1
+snapshot_ref: "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58"
+chapters:
+  - id: "00-overview"
+    path: "00-overview/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-01", "MF-02", "MF-03", "MF-04", "MF-05", "MF-06", "MF-07", "MF-08", "MF-09", "MF-10"]
+    minimum_deliverable: "总图、主链路导读、章节导航、第一批 evidence 锚点"
+    wave_trigger: "wave-01 evidence ready"
+  - id: "01-system-prompt"
+    path: "01-system-prompt/README.md"
+    phase1_state: "attach"
+    main_flow_steps: ["MF-03"]
+    minimum_deliverable: "system prompt 装配入口、规则边界、源码锚点"
+    wave_trigger: "main flow stabilized"
+  - id: "02-agentic-loop"
+    path: "02-agentic-loop/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-04", "MF-05", "MF-06", "MF-07", "MF-08", "MF-09"]
+    minimum_deliverable: "消息流、循环状态、终止条件、异常路径"
+    wave_trigger: "wave-01 evidence ready"
+  - id: "03-tool-system"
+    path: "03-tool-system/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-05", "MF-07"]
+    minimum_deliverable: "工具定义、注册路径、执行边界、结果结构"
+    wave_trigger: "wave-01 evidence ready"
+  - id: "04-permission-model"
+    path: "04-permission-model/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-06"]
+    minimum_deliverable: "权限模式、规则系统、危险判定、参数层分析"
+    wave_trigger: "wave-01 evidence ready"
+  - id: "05-context-management"
+    path: "05-context-management/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-03", "MF-08", "MF-09"]
+    minimum_deliverable: "上下文累积、compact 触发、续跑与恢复"
+    wave_trigger: "wave-01 evidence ready"
+  - id: "06-prompt-caching"
+    path: "06-prompt-caching/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-03", "MF-04"]
+    minimum_deliverable: "缓存相关入口与主链关系说明"
+    wave_trigger: "01-system-prompt and 05-context-management stable"
+  - id: "07-multi-agent"
+    path: "07-multi-agent/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-05", "MF-07"]
+    minimum_deliverable: "内置 agent 组合、覆盖优先级、teammate 生命周期与 Team 元数据"
+    wave_trigger: "single-agent hero flow stable"
+  - id: "08-mcp-integration"
+    path: "08-mcp-integration/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-03", "MF-05", "MF-07"]
+    minimum_deliverable: "配置校验、策略过滤、能力总线式接入与 mcp_instructions_delta"
+    wave_trigger: "03-tool-system and 04-permission-model stable"
+  - id: "09-startup-optimization"
+    path: "09-startup-optimization/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-02"]
+    minimum_deliverable: "启动阶段优化点与主链影响说明"
+    wave_trigger: "00-overview stable"
+  - id: "10-feature-flags"
+    path: "10-feature-flags/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-02", "MF-05"]
+    minimum_deliverable: "build-time / runtime 双层 gate 与工具池/agent 池改写机制"
+    wave_trigger: "core chapters stable"
+  - id: "11-security"
+    path: "11-security/README.md"
+    phase1_state: "deepen"
+    main_flow_steps: ["MF-02", "MF-03", "MF-06", "MF-07"]
+    minimum_deliverable: "安全边界索引、与 04 的分工说明"
+    wave_trigger: "04-permission-model stable"

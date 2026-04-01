@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-CTX-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-assembly",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-03",
+  "chapterIds": [
+    "00-overview",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/context.ts",
+    "stableSymbol": "getSystemContext",
+    "excerptHash": "manual:ctx-002-system-context-v1",
+    "lineRange": "116-149"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/context.ts",
+      "stableSymbol": "getGitStatus",
+      "excerptHash": "manual:ctx-002-git-status-v1",
+      "lineRange": "36-114"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/context.ts",
+      "stableSymbol": "getUserContext",
+      "excerptHash": "manual:ctx-002-user-context-v1",
+      "lineRange": "155-188"
+    }
+  ],
+  "observed": "`getGitStatus` 会并发读取当前分支、主分支、`git status --short`、最近 5 条提交和 `git user.name`，并在状态文本超过 2000 字符时截断。`getSystemContext` 是 memoized async 函数，在远程模式或禁用 git 指令时跳过 git 状态，否则返回包含 `gitStatus` 的对象；若启用 `BREAK_CACHE_COMMAND` 且有注入值，还会返回 `cacheBreaker`。`getUserContext` 也是 memoized async 函数；未被禁用时，它通过 `getMemoryFiles()`、`filterInjectedMemoryFiles()`、`getClaudeMds()` 聚合 `claudeMd`，并始终返回 `currentDate`。",
+  "evidenceSummary": "`system context` 来自 git 快照与可选 cache-breaker 注入，`user context` 来自 CLAUDE.md / memory files 聚合与当前日期，且两者都按会话级缓存。",
+  "inference": "MF-03 中两类上下文的来源是分开的：system context 偏环境与仓库状态，user context 偏任务现场与用户约束。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "多个 CLAUDE.md / memory files 的合并顺序与覆盖规则仍需下钻 claudemd 相关实现。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

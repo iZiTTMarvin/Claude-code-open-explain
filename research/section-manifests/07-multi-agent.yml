@@ -1,0 +1,30 @@
+version: 1
+chapter_id: "07-multi-agent"
+chapter_path: "07-multi-agent/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-05"
+  - "MF-07"
+required_evidence_ids:
+  - "EV-W01-AGENT-001"
+  - "EV-W01-AGENT-002"
+  - "EV-W01-AGENT-003"
+  - "EV-W01-AGENT-004"
+sections:
+  - title: "Claude Code 里已经有哪些内置 Agent"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-AGENT-001"
+  - title: "active agent 列表如何覆盖合并"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-AGENT-002"
+  - title: "多 Agent 最大的收益其实不是“更快”，而是“更稳”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-AGENT-003"
+  - title: "团队模式不是“多开几个 agent”这么简单"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-AGENT-004"
+notes: "Wave 1 先锚定 built-in agent 组合、覆盖优先级、in-process teammate 生命周期与 Team 模式元数据。"

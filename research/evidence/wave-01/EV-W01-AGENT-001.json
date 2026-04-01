@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-AGENT-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "multi-agent",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "07-multi-agent"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools/AgentTool/builtInAgents.ts",
+    "stableSymbol": "getBuiltInAgents",
+    "excerptHash": "manual:agent-001-builtins-v1",
+    "lineRange": "13-66"
+  },
+  "observed": "`getBuiltInAgents()` 默认先放入 `GENERAL_PURPOSE_AGENT` 和 `STATUSLINE_SETUP_AGENT`。如果 `areExplorePlanAgentsEnabled()` 为真，则再加入 `EXPLORE_AGENT` 和 `PLAN_AGENT`。非 SDK entrypoint 还会加入 `CLAUDE_CODE_GUIDE_AGENT`。当 `VERIFICATION_AGENT` feature gate 和对应实验开关都开启时，还会追加 `VERIFICATION_AGENT`。如果 `CLAUDE_AGENT_SDK_DISABLE_BUILTIN_AGENTS` 为真且当前是非交互 session，则可直接返回空数组。",
+  "evidenceSummary": "Claude Code 的 built-in agent 列表不是静态常量表，而是受 entrypoint、feature gate、实验开关和 session 类型共同控制。",
+  "inference": "`07-multi-agent` 章节不该把内置 agent 写成固定菜单，而应强调它们是按运行环境和产品阶段有条件出现的。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "如果启用 coordinator mode，`getCoordinatorAgents()` 返回的 worker 列表是否应在章节中单独展开。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

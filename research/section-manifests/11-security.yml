@@ -1,0 +1,44 @@
+version: 1
+chapter_id: "11-security"
+chapter_path: "11-security/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-02"
+  - "MF-03"
+  - "MF-06"
+  - "MF-07"
+required_evidence_ids:
+  - "EV-W01-SEC-001"
+  - "EV-W01-SEC-002"
+  - "EV-W01-SEC-003"
+  - "EV-W01-SEC-004"
+  - "EV-W01-PERM-003"
+  - "EV-W01-PERM-005"
+  - "EV-W01-MCP-001"
+sections:
+  - title: "Prompt 层为什么也是安全层"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-SEC-001"
+  - title: "MCP 为什么也是安全重灾区"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-MCP-001"
+  - title: "为什么安全不能只靠沙箱"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-SEC-002"
+  - title: "为什么“默认保守”是正确的产品选择"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-PERM-003"
+      - "EV-W01-PERM-005"
+  - title: "初始化时序为什么也是安全的一部分"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-SEC-003"
+  - title: "`headersHelper` 一类逻辑为什么值得警惕"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-SEC-004"
+notes: "Wave 1 聚焦 system-level safety instruction、sandbox manager、safe env 初始化、危险规则剥离、路径 safetyCheck 与 MCP policy 边界。"

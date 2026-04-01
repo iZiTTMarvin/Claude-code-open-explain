@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-LOOP-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "query-loop",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-08",
+  "chapterIds": [
+    "00-overview",
+    "02-agentic-loop",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/query.ts",
+    "stableSymbol": "yieldMissingToolResultBlocks",
+    "excerptHash": "manual:loop-004-missing-tool-results-v1",
+    "lineRange": "123-147"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop toolResults rebuild",
+      "excerptHash": "manual:loop-004-toolresults-v1",
+      "lineRange": "1380-1400"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/api/claude.ts",
+      "stableSymbol": "queryModel ensureToolResultPairing",
+      "excerptHash": "manual:loop-004-api-pairing-v1",
+      "lineRange": "1298-1301"
+    }
+  ],
+  "observed": "正常路径下，`streamingToolExecutor.getCompletedResults()` 或 `runTools(...)` 产出的 `update.message` 会被 `normalizeMessagesForAPI(...).filter(_ => _.type === 'user')` 转成可回灌给模型的 `toolResults`。异常/中断路径下，`yieldMissingToolResultBlocks()` 会按每个 `tool_use.id` 生成 error `tool_result`；流式中断时 `getRemainingResults()` 也会补齐 synthetic `tool_result`。进入下一轮前，`state.messages` 明确重建为 `messagesForQuery + assistantMessages + toolResults`；API 层还有 `ensureToolResultPairing()` 作为最后一道修复。",
+  "evidenceSummary": "`tool_use -> tool_result -> 下一轮 messages` 是显式闭环，而且带有异常补齐与 API 发送前修复两层兜底。",
+  "inference": "这不是“工具执行完自动神秘回到模型”的隐式机制，而是本地循环主动把 tool 产物规范化成 user-side message，再拼回下一轮输入。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "attachment 类消息中哪些最终回流给模型、哪些只服务 UI，需要更细拆分。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W99-EXAMPLE-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "tool-execution",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "03-tool-system",
+    "04-permission-model"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/Tool.ts",
+    "stableSymbol": "findToolByName",
+    "excerptHash": "manual:findToolByName-window-v1",
+    "lineRange": "358-370"
+  },
+  "observed": "主循环在识别到 tool_use 后，会通过统一工具查找路径匹配到本地工具定义。",
+  "evidenceSummary": "query.ts 在处理 tool_use 时会调用工具编排层；Tool.ts 暴露 findToolByName，用来把工具名映射到具体工具定义。",
+  "inference": "统一工具契约让权限检查、结果回填和 UI 渲染可以共享同一套工具身份边界。",
+  "confidence": "medium",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "MCP 动态工具是否在所有路径上都走同一套查找入口？"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

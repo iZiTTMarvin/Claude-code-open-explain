@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-LOOP-005",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "query-loop",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-09",
+  "chapterIds": [
+    "00-overview",
+    "02-agentic-loop",
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/query.ts",
+    "stableSymbol": "queryLoop autocompact branch",
+    "excerptHash": "manual:loop-005-autocompact-v1",
+    "lineRange": "453-540"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop token budget continuation",
+      "excerptHash": "manual:loop-005-tokenbudget-v1",
+      "lineRange": "1267-1357"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query/stopHooks.ts",
+      "stableSymbol": "handleStopHooks",
+      "excerptHash": "manual:loop-005-stophooks-v1",
+      "lineRange": "175-327"
+    }
+  ],
+  "observed": "`autocompact()` 一旦返回 `compactionResult`，主循环就构造 `postCompactMessages`、逐条 `yield`，并用它们替换 `messagesForQuery` 继续当前 query。若进入 `handleStopHooks()`，Stop hooks 会消费 `[...messagesForQuery, ...assistantMessages]`，可能返回 `preventContinuation`，也可能产出 `blockingErrors`。前者在 `query.ts` 直接 `return { reason: 'stop_hook_prevented' }`；后者把错误消息拼回 state、设 `stopHookActive: true` 后 `continue`。再往后，token budget 若判定 `decision.action === 'continue'`，则追加 meta user nudge 并继续；否则本轮 `return { reason: 'completed' }`。",
+  "evidenceSummary": "continue / stop / compact 不是单点判断，而是“先 compact，再 stop hooks，再 token-budget auto-continue，最后 completed”的分层决策链。",
+  "inference": "如果章节只画一个“模型回复后要么继续要么停止”的二叉图，会漏掉真正决定循环命运的三层关卡。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`reactiveCompact` 与 `max_output_tokens` 恢复分支是否应作为 MF-09 的恢复子分支单独展开。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

@@ -1,0 +1,42 @@
+version: 1
+chapter_id: "05-context-management"
+chapter_path: "05-context-management/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-03"
+  - "MF-08"
+  - "MF-09"
+required_evidence_ids:
+  - "EV-W01-CTX-001"
+  - "EV-W01-CTX-002"
+  - "EV-W01-CTX-004"
+  - "EV-W01-LOOP-004"
+  - "EV-W01-LOOP-005"
+  - "EV-W01-COMP-001"
+  - "EV-W01-COMP-002"
+  - "EV-W01-COMP-003"
+  - "EV-W01-COMP-004"
+sections:
+  - title: "`fetchSystemPromptParts()` 很值得注意"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-004"
+  - title: "自动压缩不是随便触发的"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-COMP-001"
+      - "EV-W01-COMP-002"
+  - title: "为什么 Claude Code 不把压缩理解成“删历史”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-COMP-003"
+      - "EV-W01-LOOP-005"
+  - title: "compact 和 prompt cache 也会互相牵制"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-COMP-004"
+  - title: "`tool_result` 回流如何影响上下文"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-004"
+notes: "Wave 1 聚焦 query 前上下文组装、tool_result 回流、auto compact 阈值、source gating 与 compact summary 路径。"

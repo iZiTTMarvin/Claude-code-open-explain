@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-MCP-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "mcp-integration",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "08-mcp-integration"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/mcp/client.ts",
+    "stableSymbol": "getMcpToolsCommandsAndResources",
+    "excerptHash": "manual:mcp-002-get-tools-commands-resources-v1",
+    "lineRange": "2226-2408"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/mcp/client.ts",
+      "stableSymbol": "prefetchAllMcpResources",
+      "excerptHash": "manual:mcp-002-prefetch-v1",
+      "lineRange": "2408-2462"
+    }
+  ],
+  "observed": "`getMcpToolsCommandsAndResources()` 会先把 disabled servers 与 active servers 分开，再按 local / remote 两组分别批处理连接。连接成功后，不只是拉 tools，还会并发拉 commands、MCP skills、resources；首次遇到支持 resources 的 server 时，还会额外把 `ListMcpResourcesTool` 和 `ReadMcpResourceTool` 注入结果。`prefetchAllMcpResources()` 则在外层汇总 clients、tools、commands，并在完成后上报 telemetry。",
+  "evidenceSummary": "MCP 在 Claude Code 里不是单一“工具调用转发”，而是一次性接入 tools、commands、skills、resources 四类能力，并按连接类型做不同并发策略。",
+  "inference": "`08-mcp-integration` 章节应该把 MCP 讲成“外部能力总线”而不只是“外部工具插件”。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "资源工具只在首次支持 resources 的 server 注入一次，这个设计是否会影响读者对“每台 server 都带自己的 resource tools”的直觉。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

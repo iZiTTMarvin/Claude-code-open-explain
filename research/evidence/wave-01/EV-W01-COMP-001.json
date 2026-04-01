@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-COMP-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-compaction",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-09",
+  "chapterIds": [
+    "00-overview",
+    "05-context-management",
+    "06-prompt-caching"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/compact/autoCompact.ts",
+    "stableSymbol": "getEffectiveContextWindowSize",
+    "excerptHash": "manual:comp-001-effective-window-v1",
+    "lineRange": "33-49"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/compact/autoCompact.ts",
+      "stableSymbol": "getAutoCompactThreshold",
+      "excerptHash": "manual:comp-001-threshold-v1",
+      "lineRange": "72-90"
+    }
+  ],
+  "observed": "`getEffectiveContextWindowSize()` 先取 `reservedTokensForSummary = min(getMaxOutputTokensForModel(model), 20000)`，再用 `contextWindow - reservedTokensForSummary` 得到 effective context window；若设置了 `CLAUDE_CODE_AUTO_COMPACT_WINDOW`，还会先把原始 context window 下压到该值。`getAutoCompactThreshold()` 再在 effective window 基础上减去 `AUTOCOMPACT_BUFFER_TOKENS = 13000`。",
+  "evidenceSummary": "auto compact 阈值不是直接对原始 context window 判定，而是“先预留 summary 输出空间，再减去 13k buffer”的两段式计算。",
+  "inference": "阈值设计把“能否先成功生成 compact summary”作为前置约束，因此 summary 输出 token 预算先被从窗口里扣掉；随后再留 13k 作为 proactive headroom。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`CLAUDE_AUTOCOMPACT_PCT_OVERRIDE` 更偏测试用途还是线上灰度用途。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

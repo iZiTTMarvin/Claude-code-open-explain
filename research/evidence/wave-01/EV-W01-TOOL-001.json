@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-TOOL-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "tool-execution",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "00-overview",
+    "03-tool-system"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/Tool.ts",
+    "stableSymbol": "findToolByName",
+    "excerptHash": "manual:tool-001-findtoolbyname-v1",
+    "lineRange": "345-360"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/tools/toolExecution.ts",
+      "stableSymbol": "runToolUse",
+      "excerptHash": "manual:tool-001-runtooluse-v1",
+      "lineRange": "337-410"
+    }
+  ],
+  "observed": "`findToolByName()` 统一按“主名或 alias”匹配；`runToolUse()` 先在 `toolUseContext.options.tools` 中查找当前可用工具，未命中时只对 `getAllBaseTools()` 做一次“旧 alias 兼容”回退；再找不到就直接产出错误 `tool_result`。",
+  "evidenceSummary": "工具查找不是全局任意搜索，而是“当前工具池优先 + 受限别名兜底”。",
+  "inference": "`findToolByName` 是 MF-05 的核心命名解析规则；执行层复用同一规则，保证“模型看到的名字”和“执行时解析的名字”一致。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "非 REPL / 非主链入口是否也完全遵循同样的 alias 兼容策略。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

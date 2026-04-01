@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-LOOP-001",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "query-loop",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-04",
+  "chapterIds": [
+    "00-overview",
+    "02-agentic-loop"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/query.ts",
+    "stableSymbol": "query",
+    "excerptHash": "manual:loop-001-query-wrapper-v1",
+    "lineRange": "219-238"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop",
+      "excerptHash": "manual:loop-001-queryloop-start-v1",
+      "lineRange": "241-339"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query/config.ts",
+      "stableSymbol": "buildQueryConfig",
+      "excerptHash": "manual:loop-001-build-query-config-v1",
+      "lineRange": "29-45"
+    }
+  ],
+  "observed": "`query()` 只是包装层，直接 `yield* queryLoop(...)`；真正的长生命周期循环在 `queryLoop()` 的 `while (true)` 中启动。进入循环前会先初始化 `State`、预算跟踪器、`taskBudgetRemaining`，并通过 `buildQueryConfig()` 一次性快照会话级 gate 与 `sessionId`。",
+  "evidenceSummary": "主循环的真实入口不是外层 `query()`，而是 `queryLoop()` 中在配置快照之后进入的无限循环。",
+  "inference": "如果把 `query()` 当作 agent loop 本体，会错过一个关键事实：很多行为开关不是每轮动态读取，而是在一次 `query()` 调用开始时被冻结，再由 `queryLoop()` 多轮复用。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`state.transition` 的消费点是否需要单独作为循环状态机证据。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

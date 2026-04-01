@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-COMP-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-compaction",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-09",
+  "chapterIds": [
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/compact/autoCompact.ts",
+    "stableSymbol": "shouldAutoCompact",
+    "excerptHash": "manual:comp-002-should-autocompact-v1",
+    "lineRange": "160-238"
+  },
+  "observed": "`shouldAutoCompact()` 对 `querySource === 'session_memory'` 或 `querySource === 'compact'` 直接返回 `false`；开启 `CONTEXT_COLLAPSE` 特性时，`querySource === 'marble_origami'` 也被直接跳过。除此之外，即便 source 不在跳过名单中，只要 reactive-only 模式开启，或 `isContextCollapseEnabled()` 为真，也会整体抑制 proactive autocompact。",
+  "evidenceSummary": "显式跳过的 query source 至少包括 `session_memory`、`compact`，以及在 context-collapse 特性打开时的 `marble_origami`；此外还存在模式级全局抑制。",
+  "inference": "这层门禁不是单纯“哪些来源不支持 compact”，而是在避免递归/死锁，以及避免与 context-collapse 争夺同一段上下文控制权。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`marble_origami` 是否只在特定构建中存在，仍需追 feature gate 和 agent 注册处。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

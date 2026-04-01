@@ -1,0 +1,30 @@
+version: 1
+chapter_id: "08-mcp-integration"
+chapter_path: "08-mcp-integration/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-03"
+  - "MF-05"
+required_evidence_ids:
+  - "EV-W01-MCP-001"
+  - "EV-W01-MCP-002"
+  - "EV-W01-MCP-003"
+  - "EV-W01-TOOL-005"
+sections:
+  - title: "MCP 在 Claude Code 里不只是一种“远程调用”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-MCP-002"
+  - title: "MCP 接入前先过“配置校验 + 策略过滤”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-MCP-001"
+  - title: "MCP 为什么会影响 Prompt Cache"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-MCP-003"
+  - title: "MCP 工具与执行层的关系"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-005"
+notes: "Wave 1 先锚定配置校验与策略过滤、能力总线式接入、以及 MCP 指令对 prompt cache 的反向约束。"

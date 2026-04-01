@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-TOOL-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "tool-execution",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "03-tool-system",
+    "06-prompt-caching"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools.ts",
+    "stableSymbol": "getTools",
+    "excerptHash": "manual:tool-002-gettools-v1",
+    "lineRange": "271-388"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/screens/REPL.tsx",
+      "stableSymbol": "computeTools",
+      "excerptHash": "manual:tool-002-computetools-v1",
+      "lineRange": "2399-2437"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "refreshTools between turns",
+      "excerptHash": "manual:tool-002-refreshtools-v1",
+      "lineRange": "1659-1670"
+    }
+  ],
+  "observed": "`getTools()` 只返回 built-in tools，并先做 mode / deny / isEnabled 过滤；`assembleToolPool()` 才负责把 built-in 与 MCP tools 组合去重。主 REPL 路径里，`computeTools()` 会用 `assembleToolPool()` 的结果继续做 `mergeAndFilterTools()`、`resolveAgentTools()`，最终写入 `toolUseContext.options.tools`，且 query 间轮次还能通过 `refreshTools()` 刷新。",
+  "evidenceSummary": "`getTools()` 是内置工具清单入口，不等于真实执行池；真实执行池是 `toolUseContext.options.tools`。",
+  "inference": "只说 `getTools()` 会遗漏 MCP 合流、去重、agent 过滤以及中途刷新这几层。",
+  "confidence": "medium",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "headless / SDK / MCP entrypoint 是否都走同一套 `options.tools` 组装链路。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

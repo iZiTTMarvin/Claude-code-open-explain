@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-PERM-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "permission-boundary",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-06",
+  "chapterIds": [
+    "04-permission-model",
+    "11-security"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/utils/permissions/permissionSetup.ts",
+    "stableSymbol": "isDangerousBashPermission",
+    "excerptHash": "manual:perm-003-dangerous-bash-v1",
+    "lineRange": "94-147"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/permissions/permissionSetup.ts",
+      "stableSymbol": "isDangerousPowerShellPermission",
+      "excerptHash": "manual:perm-003-dangerous-powershell-v1",
+      "lineRange": "157-233"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/utils/permissions/permissionSetup.ts",
+      "stableSymbol": "stripDangerousPermissionsForAutoMode",
+      "excerptHash": "manual:perm-003-strip-auto-mode-v1",
+      "lineRange": "510-552"
+    }
+  ],
+  "observed": "`isDangerousBashPermission` 会把空规则、`*` 以及解释器/执行器相关的 exact、`:*`、后缀 `*`、` *` 等形状判为危险；`isDangerousPowerShellPermission` 对 PowerShell 侧做同类检查，并内置 `pwsh`、`powershell`、`cmd`、`wsl`、`iex`、`invoke-expression`、`start-process` 等 pattern。`stripDangerousPermissionsForAutoMode` 会删掉这些危险 allow，并把被删规则记到 `strippedDangerousRules`。",
+  "evidenceSummary": "Bash / PowerShell 的危险规则是通过静态规则形状识别出来的，并会在 auto mode 入口被剥离。",
+  "inference": "auto mode 不信任那些会让 shell/agent 执行能力“提前被 allow”的规则形状；它通过启动期规则净化，避免 classifier 还没判定就被通配或解释器前缀规则绕过。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`DANGEROUS_BASH_PATTERNS` 的完整列表若要公开展示，还需补常量锚点。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

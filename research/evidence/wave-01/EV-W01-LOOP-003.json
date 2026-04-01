@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-LOOP-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "query-loop",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "02-agentic-loop"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/query/config.ts",
+    "stableSymbol": "buildQueryConfig",
+    "excerptHash": "manual:loop-003-streaming-gate-v1",
+    "lineRange": "29-45"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop streaming tool detection",
+      "excerptHash": "manual:loop-003-detect-tooluse-v1",
+      "lineRange": "551-568"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop addTool during stream",
+      "excerptHash": "manual:loop-003-addtool-v1",
+      "lineRange": "826-843"
+    }
+  ],
+  "observed": "`buildQueryConfig()` 会把 `streamingToolExecution` gate 快照下来；每轮 `queryLoop` 再据此决定是否创建 `StreamingToolExecutor`。模型流式返回 assistant message 时，代码并不依赖 `stop_reason === 'tool_use'`，而是直接扫描 content block，把 `tool_use` 推入 `toolUseBlocks`，设置 `needsFollowUp = true`，并在开启流式执行时立即 `addTool(...)`。",
+  "evidenceSummary": "`tool_use` 的识别基于 assistant content block 本身，而不是 API 的 `stop_reason`；是否边流式边执行工具由 query 级配置 gate 决定。",
+  "inference": "工具调用不是等整条 assistant 响应结束后才统一判定，流式路径下它在消息到达时就被结构化捕获并排队。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`StreamingToolExecutor` 与后备 `runTools(...)` 的差异是否需要作为单独小节展开。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

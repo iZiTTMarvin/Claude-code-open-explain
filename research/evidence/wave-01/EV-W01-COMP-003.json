@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-COMP-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "context-compaction",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-09",
+  "chapterIds": [
+    "05-context-management"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/services/compact/compact.ts",
+    "stableSymbol": "buildPostCompactMessages",
+    "excerptHash": "manual:comp-003-postcompact-v1",
+    "lineRange": "325-338"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/query.ts",
+      "stableSymbol": "queryLoop autocompact continuation",
+      "excerptHash": "manual:comp-003-queryloop-continue-v1",
+      "lineRange": "453-535"
+    }
+  ],
+  "observed": "`queryLoop()` 在真正发起主模型请求前调用 `deps.autocompact(...)`。若拿到 `compactionResult`，先记录统计与 `taskBudgetRemaining`，再把 tracking 重置为“刚 compact 过”的状态，然后调用 `buildPostCompactMessages()` 按固定顺序重建消息数组：`boundaryMarker -> summaryMessages -> messagesToKeep -> attachments -> hookResults`。这些 post-compact messages 会被逐条 `yield` 给外层，同时 `messagesForQuery = postCompactMessages`，之后当前 query 调用继续向下执行。",
+  "evidenceSummary": "proactive auto compact 是 query 主循环内部的一次“消息集替换 + 继续执行”，不是一个独立会话。",
+  "inference": "`MF-09` 的 continue / compact / stop 在这里被实现成同一轮 query 内的状态跃迁：compact 把长历史压成 boundary+summary+attachments，新上下文马上接上后续模型请求。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "compact 后这些消息在 REPL / transcript 层如何落盘与渲染，还需交叉看 print.ts / sessionStorage.ts。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

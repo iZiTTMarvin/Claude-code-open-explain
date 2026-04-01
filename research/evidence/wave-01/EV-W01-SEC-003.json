@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-SEC-003",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "security",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-02",
+  "chapterIds": [
+    "11-security",
+    "09-startup-optimization"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/entrypoints/init.ts",
+    "stableSymbol": "applySafeConfigEnvironmentVariables",
+    "excerptHash": "manual:sec-003-safe-env-v1",
+    "lineRange": "30-45"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/entrypoints/init.ts",
+      "stableSymbol": "init_safe_env_vars_applied checkpoint",
+      "excerptHash": "manual:sec-003-safe-env-checkpoint-v1",
+      "lineRange": "80-95"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/entrypoints/init.ts",
+      "stableSymbol": "applyConfigEnvironmentVariables after remote settings",
+      "excerptHash": "manual:sec-003-full-env-after-remote-v1",
+      "lineRange": "260-272"
+    }
+  ],
+  "observed": "`init.ts` 启动时先引入并应用 `applySafeConfigEnvironmentVariables`，随后打出 `init_safe_env_vars_applied` checkpoint。之后在等待远程托管设置加载完成时，才再次调用 `applyConfigEnvironmentVariables()`，并在注释里明确写出这样做是为了在 telemetry 初始化前重新应用远程设置。",
+  "evidenceSummary": "Claude Code 区分了“启动早期可安全应用的环境变量”与“信任建立/远程设置加载后才能完整应用的环境变量”。",
+  "inference": "这说明安全边界不仅体现在权限和沙箱，还体现在初始化时序：在信任和远程设置尚未到位之前，系统不会急着把所有配置都执行进环境里。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "哪些 managed env 项属于 safe 子集，哪些必须延后，若要细讲仍需继续追 managedEnv 实现。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

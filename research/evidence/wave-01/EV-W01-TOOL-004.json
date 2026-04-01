@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-TOOL-004",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "tool-execution",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-07",
+  "chapterIds": [
+    "03-tool-system"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/Tool.ts",
+    "stableSymbol": "ToolResult",
+    "excerptHash": "manual:tool-004-toolresult-type-v1",
+    "lineRange": "321-335"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/Tool.ts",
+      "stableSymbol": "mapToolResultToToolResultBlockParam",
+      "excerptHash": "manual:tool-004-map-result-v1",
+      "lineRange": "557-588"
+    },
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/services/tools/toolExecution.ts",
+      "stableSymbol": "addToolResult",
+      "excerptHash": "manual:tool-004-addtoolresult-v1",
+      "lineRange": "1403-1467"
+    }
+  ],
+  "observed": "工具实现先返回原始 `ToolResult<T>`，其中包含 `data`、可选 `newMessages`、`contextModifier`、`mcpMeta`；执行层再通过 `mapToolResultToToolResultBlockParam()` 把 `data` 序列化成模型协议里的 `tool_result` 块。拒绝/错误场景下，`is_error: true` 的 `tool_result` 只承载文本，图片等额外内容作为同一 user message 的并列顶层 block 附加。",
+  "evidenceSummary": "`tool_result` 只是执行结果消息里的一个协议块，不等于整个返回对象，更不等于 UI 渲染结果。",
+  "inference": "tool result 的结构边界至少有三层：工具原始输出、模型侧 `tool_result` block、外层 user message 包络。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "`is_error` 下只能文本的约束是来自 SDK 类型限制，还是项目内额外约束。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

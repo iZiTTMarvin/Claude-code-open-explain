@@ -1,0 +1,32 @@
+version: 1
+chapter_id: "10-feature-flags"
+chapter_path: "10-feature-flags/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-02"
+  - "MF-05"
+required_evidence_ids:
+  - "EV-W01-FLAG-001"
+  - "EV-W01-FLAG-002"
+  - "EV-W01-FLAG-003"
+sections:
+  - title: "先分清两类 Flag"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-FLAG-001"
+      - "EV-W01-FLAG-002"
+  - title: "为什么 `feature()` 和性能优化强相关"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-FLAG-001"
+      - "EV-W01-FLAG-003"
+  - title: "运行时 gate 如何和构建时 gate 叠加"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-FLAG-002"
+  - title: "工具池和 agent 池如何被 flag 改写"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-FLAG-002"
+      - "EV-W01-FLAG-003"
+notes: "Wave 1 聚焦 build-time feature gate、GrowthBook 运行时 gate 和工具/agent 池形状如何被 flag 改写。"

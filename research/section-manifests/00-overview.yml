@@ -1,0 +1,53 @@
+version: 1
+chapter_id: "00-overview"
+chapter_path: "00-overview/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-01"
+  - "MF-02"
+  - "MF-03"
+  - "MF-04"
+  - "MF-05"
+  - "MF-06"
+  - "MF-07"
+  - "MF-08"
+  - "MF-09"
+  - "MF-10"
+required_evidence_ids:
+  - "EV-W01-CTX-001"
+  - "EV-W01-CTX-002"
+  - "EV-W01-CTX-004"
+  - "EV-W01-LOOP-001"
+  - "EV-W01-LOOP-004"
+  - "EV-W01-LOOP-005"
+  - "EV-W01-TOOL-001"
+  - "EV-W01-PERM-001"
+  - "EV-W01-COMP-001"
+sections:
+  - title: "第 1 步：启动阶段先把运行时搭起来"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-001"
+  - title: "第 2 步：QueryEngine 准备本轮请求"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-002"
+      - "EV-W01-CTX-004"
+  - title: "第 3 步：query() 进入真正的 agent loop"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-LOOP-001"
+      - "EV-W01-LOOP-004"
+  - title: "第 4 步：工具、权限、上下文在循环中不断参与"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-001"
+      - "EV-W01-PERM-001"
+      - "EV-W01-COMP-001"
+  - title: "为什么核心 loop 很简单，但代码还是很多"
+    kind: "explain"
+    evidence_ids:
+      - "EV-W01-LOOP-001"
+      - "EV-W01-LOOP-005"
+      - "EV-W01-COMP-001"
+notes: "这是 00-overview 的第一版真实 manifest。后续应补充段落级 evidence 映射。"

@@ -1,0 +1,37 @@
+version: 1
+chapter_id: "03-tool-system"
+chapter_path: "03-tool-system/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-05"
+  - "MF-07"
+required_evidence_ids:
+  - "EV-W01-TOOL-001"
+  - "EV-W01-TOOL-002"
+  - "EV-W01-TOOL-003"
+  - "EV-W01-TOOL-004"
+  - "EV-W01-TOOL-005"
+  - "EV-W01-FLAG-003"
+sections:
+  - title: "`src/tools.ts` 到底在做什么"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-002"
+      - "EV-W01-FLAG-003"
+  - title: "工具查找不是“随便搜一下名字”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-001"
+  - title: "编排层和执行层不是一回事"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-003"
+  - title: "`tool_result` 不是一个简单返回值"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-004"
+  - title: "内置工具和 MCP 工具在执行层是“同池异味”"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-TOOL-005"
+notes: "Wave 1 聚焦工具池、工具查找、编排/执行分工、tool_result 结构边界与 MCP 混合点。"

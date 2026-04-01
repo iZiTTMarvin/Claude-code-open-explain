@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "evidenceId": "EV-W01-AGENT-002",
+  "status": "draft",
+  "waveId": "wave-01",
+  "agentRole": "multi-agent",
+  "snapshotRef": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+  "lastVerifiedAt": "2026-04-01T00:00:00Z",
+  "mainFlowStepId": "MF-05",
+  "chapterIds": [
+    "07-multi-agent"
+  ],
+  "sourceAnchor": {
+    "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+    "filePath": "src/tools/AgentTool/loadAgentsDir.ts",
+    "stableSymbol": "getActiveAgentsFromList",
+    "excerptHash": "manual:agent-002-active-list-v1",
+    "lineRange": "193-217"
+  },
+  "relatedAnchors": [
+    {
+      "snapshotCommit": "33bf4acc3b902ce607d93f069578666d82743e58",
+      "filePath": "src/tools/AgentTool/loadAgentsDir.ts",
+      "stableSymbol": "getAgentDefinitionsWithOverrides",
+      "excerptHash": "manual:agent-002-overrides-v1",
+      "lineRange": "296-371"
+    }
+  ],
+  "observed": "`getActiveAgentsFromList()` 会先按 source 把 agent 分成 built-in、plugin、userSettings、projectSettings、flagSettings、policySettings 六组，然后按这个顺序把它们写进同一个 `Map<agentType, AgentDefinition>`；后写入的同名 agent 会覆盖前面的定义。`getAgentDefinitionsWithOverrides()` 则会把 built-in、plugin、custom agents 合成 `allAgentsList`，再调用 `getActiveAgentsFromList()` 得到最终 activeAgents。",
+  "evidenceSummary": "Claude Code 的 active agent 列表不是简单拼接，而是有一条明确的覆盖优先级链。",
+  "inference": "多 Agent 体系里“某个 agent 为什么长这样”并不只由 built-in 定义决定，还会被 plugin、用户配置、项目配置、flag 和 policy 逐层覆盖。",
+  "confidence": "high",
+  "conflictFlag": false,
+  "readyForChapterBackfill": false,
+  "openQuestions": [
+    "如果同名 agent 在多个 source 同时存在，章节是否要明确展示这条优先级链。"
+  ],
+  "reviewedBy": [],
+  "supersedes": ""
+}

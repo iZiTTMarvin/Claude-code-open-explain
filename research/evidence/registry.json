@@ -1,0 +1,264 @@
+{
+  "registryVersion": 1,
+  "sourceSnapshot": "Claude-code-open@33bf4acc3b902ce607d93f069578666d82743e58",
+  "truthChain": [
+    "snapshot",
+    "evidence",
+    "section-manifest",
+    "chapter"
+  ],
+  "artifacts": [
+    {
+      "evidenceId": "EV-W01-CTX-001",
+      "path": "research/evidence/wave-01/EV-W01-CTX-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-02",
+      "chapterIds": ["00-overview", "05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-CTX-002",
+      "path": "research/evidence/wave-01/EV-W01-CTX-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["00-overview", "05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-CTX-003",
+      "path": "research/evidence/wave-01/EV-W01-CTX-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["01-system-prompt", "05-context-management", "06-prompt-caching"]
+    },
+    {
+      "evidenceId": "EV-W01-CTX-004",
+      "path": "research/evidence/wave-01/EV-W01-CTX-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["00-overview", "01-system-prompt", "02-agentic-loop", "05-context-management", "06-prompt-caching"]
+    },
+    {
+      "evidenceId": "EV-W01-LOOP-001",
+      "path": "research/evidence/wave-01/EV-W01-LOOP-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-04",
+      "chapterIds": ["00-overview", "02-agentic-loop"]
+    },
+    {
+      "evidenceId": "EV-W01-LOOP-003",
+      "path": "research/evidence/wave-01/EV-W01-LOOP-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["02-agentic-loop"]
+    },
+    {
+      "evidenceId": "EV-W01-LOOP-004",
+      "path": "research/evidence/wave-01/EV-W01-LOOP-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-08",
+      "chapterIds": ["00-overview", "02-agentic-loop", "05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-LOOP-005",
+      "path": "research/evidence/wave-01/EV-W01-LOOP-005.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-09",
+      "chapterIds": ["00-overview", "02-agentic-loop", "05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-TOOL-001",
+      "path": "research/evidence/wave-01/EV-W01-TOOL-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["00-overview", "03-tool-system"]
+    },
+    {
+      "evidenceId": "EV-W01-TOOL-002",
+      "path": "research/evidence/wave-01/EV-W01-TOOL-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["03-tool-system", "06-prompt-caching"]
+    },
+    {
+      "evidenceId": "EV-W01-TOOL-003",
+      "path": "research/evidence/wave-01/EV-W01-TOOL-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["02-agentic-loop", "03-tool-system", "04-permission-model"]
+    },
+    {
+      "evidenceId": "EV-W01-TOOL-004",
+      "path": "research/evidence/wave-01/EV-W01-TOOL-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["03-tool-system"]
+    },
+    {
+      "evidenceId": "EV-W01-TOOL-005",
+      "path": "research/evidence/wave-01/EV-W01-TOOL-005.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["03-tool-system", "08-mcp-integration"]
+    },
+    {
+      "evidenceId": "EV-W01-PERM-001",
+      "path": "research/evidence/wave-01/EV-W01-PERM-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-06",
+      "chapterIds": ["00-overview", "04-permission-model"]
+    },
+    {
+      "evidenceId": "EV-W01-PERM-003",
+      "path": "research/evidence/wave-01/EV-W01-PERM-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-06",
+      "chapterIds": ["04-permission-model", "11-security"]
+    },
+    {
+      "evidenceId": "EV-W01-PERM-005",
+      "path": "research/evidence/wave-01/EV-W01-PERM-005.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-06",
+      "chapterIds": ["04-permission-model", "11-security"]
+    },
+    {
+      "evidenceId": "EV-W01-COMP-001",
+      "path": "research/evidence/wave-01/EV-W01-COMP-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-09",
+      "chapterIds": ["00-overview", "05-context-management", "06-prompt-caching"]
+    },
+    {
+      "evidenceId": "EV-W01-COMP-002",
+      "path": "research/evidence/wave-01/EV-W01-COMP-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-09",
+      "chapterIds": ["05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-COMP-003",
+      "path": "research/evidence/wave-01/EV-W01-COMP-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-09",
+      "chapterIds": ["05-context-management"]
+    },
+    {
+      "evidenceId": "EV-W01-COMP-004",
+      "path": "research/evidence/wave-01/EV-W01-COMP-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-09",
+      "chapterIds": ["05-context-management", "06-prompt-caching"]
+    },
+    {
+      "evidenceId": "EV-W01-AGENT-001",
+      "path": "research/evidence/wave-01/EV-W01-AGENT-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["07-multi-agent"]
+    },
+    {
+      "evidenceId": "EV-W01-AGENT-002",
+      "path": "research/evidence/wave-01/EV-W01-AGENT-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["07-multi-agent"]
+    },
+    {
+      "evidenceId": "EV-W01-AGENT-003",
+      "path": "research/evidence/wave-01/EV-W01-AGENT-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["07-multi-agent"]
+    },
+    {
+      "evidenceId": "EV-W01-AGENT-004",
+      "path": "research/evidence/wave-01/EV-W01-AGENT-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["07-multi-agent"]
+    },
+    {
+      "evidenceId": "EV-W01-MCP-001",
+      "path": "research/evidence/wave-01/EV-W01-MCP-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["08-mcp-integration", "11-security"]
+    },
+    {
+      "evidenceId": "EV-W01-MCP-002",
+      "path": "research/evidence/wave-01/EV-W01-MCP-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["08-mcp-integration"]
+    },
+    {
+      "evidenceId": "EV-W01-MCP-003",
+      "path": "research/evidence/wave-01/EV-W01-MCP-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["01-system-prompt", "06-prompt-caching", "08-mcp-integration"]
+    },
+    {
+      "evidenceId": "EV-W01-START-001",
+      "path": "research/evidence/wave-01/EV-W01-START-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-02",
+      "chapterIds": ["09-startup-optimization"]
+    },
+    {
+      "evidenceId": "EV-W01-START-002",
+      "path": "research/evidence/wave-01/EV-W01-START-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-02",
+      "chapterIds": ["09-startup-optimization"]
+    },
+    {
+      "evidenceId": "EV-W01-FLAG-001",
+      "path": "research/evidence/wave-01/EV-W01-FLAG-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-02",
+      "chapterIds": ["10-feature-flags", "09-startup-optimization"]
+    },
+    {
+      "evidenceId": "EV-W01-FLAG-002",
+      "path": "research/evidence/wave-01/EV-W01-FLAG-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["10-feature-flags", "07-multi-agent"]
+    },
+    {
+      "evidenceId": "EV-W01-FLAG-003",
+      "path": "research/evidence/wave-01/EV-W01-FLAG-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-05",
+      "chapterIds": ["03-tool-system", "06-prompt-caching", "10-feature-flags"]
+    },
+    {
+      "evidenceId": "EV-W01-SEC-001",
+      "path": "research/evidence/wave-01/EV-W01-SEC-001.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["11-security"]
+    },
+    {
+      "evidenceId": "EV-W01-SEC-002",
+      "path": "research/evidence/wave-01/EV-W01-SEC-002.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-07",
+      "chapterIds": ["11-security"]
+    },
+    {
+      "evidenceId": "EV-W01-SEC-003",
+      "path": "research/evidence/wave-01/EV-W01-SEC-003.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-02",
+      "chapterIds": ["11-security", "09-startup-optimization"]
+    },
+    {
+      "evidenceId": "EV-W01-SEC-004",
+      "path": "research/evidence/wave-01/EV-W01-SEC-004.json",
+      "status": "draft",
+      "mainFlowStepId": "MF-03",
+      "chapterIds": ["11-security"]
+    }
+  ]
+}

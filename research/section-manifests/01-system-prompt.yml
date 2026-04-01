@@ -1,0 +1,30 @@
+version: 1
+chapter_id: "01-system-prompt"
+chapter_path: "01-system-prompt/README.md"
+status: "draft"
+main_flow_steps:
+  - "MF-03"
+required_evidence_ids:
+  - "EV-W01-CTX-003"
+  - "EV-W01-CTX-004"
+  - "EV-W01-MCP-003"
+sections:
+  - title: "`getSystemPrompt()` 到底在做什么"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-003"
+  - title: "静态区与动态区"
+    kind: "explain"
+    evidence_ids:
+      - "EV-W01-CTX-003"
+      - "EV-W01-MCP-003"
+  - title: "为什么 `CLAUDE.md` 不直接塞进 System Prompt"
+    kind: "fact"
+    evidence_ids:
+      - "EV-W01-CTX-004"
+  - title: "真正要学的，不只是 Prompt 文案，而是 Prompt 架构"
+    kind: "explain"
+    evidence_ids:
+      - "EV-W01-CTX-003"
+      - "EV-W01-CTX-004"
+notes: "Wave 1 先锚定系统提示词装配优先级与 query 前装配路径。"
